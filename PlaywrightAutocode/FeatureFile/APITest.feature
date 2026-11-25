@@ -5,12 +5,12 @@ Feature: API Testing
         Given I send a delete request
         Then The response status code of delete should be 204
 
-    @method11
+    @method23
     Scenario: Perform Get operation
         Given I send a get request
         Then The response status code of get should be 200
 
-    @method111
+    @method
     Scenario: Perform post operation
         Given I send a post request with body
             """

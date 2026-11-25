@@ -1,0 +1,84 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "page-object-model;verify-login-functionality-for-the-orangehrm-application",
+        "keyword": "Scenario",
+        "line": 14,
+        "name": "Verify Login functionality for the OrangeHRM Application",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 546900577
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 10358191992
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "I launch the OrangeHRM Application",
+            "match": {
+              "location": "PlaywrightAutocode/StepDefinition/POM.ts:15"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 3289645330
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "I verify Login functionality for the OrangeHRM Application",
+            "match": {
+              "location": "PlaywrightAutocode/StepDefinition/POM.ts:23"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 21174372654
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "I verify Logout functionality for the OrangeHRM Application",
+            "match": {
+              "location": "PlaywrightAutocode/StepDefinition/POM.ts:40"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 350627636
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@method22",
+            "line": 13
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "page-object-model",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Page object model",
+    "tags": [],
+    "uri": "PlaywrightAutocode/FeatureFile/POM.feature"
+  }
+]
