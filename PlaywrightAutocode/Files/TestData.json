@@ -19,5 +19,14 @@
         "Phone": "4564564567",
         "Address": "kerala",
         "Wikipedia": "javascript"
+    },
+     "CredentialsOrangeHRM":{
+        "username":"Admin",
+        "password":"admin123",
+        "url":"https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+        "title":"OrangeHRM",
+        "usernameFYP":"Aswin",
+        "usernameValue":"Sai"
     }
+
 }
