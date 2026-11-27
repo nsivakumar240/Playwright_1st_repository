@@ -1,6 +1,7 @@
+
 {
     "default": {
-        "tags": "@method22",  
+        "tags": "@method22",
         "dryRun": false,
         "formatOptions": {
             "snippetInterface": "async-await",
@@ -20,6 +21,7 @@
             "progress-bar",
             "html:test-result/cucumber-report.html",
             "json:test-result/cucumber-report.json",
+            "junit:test-result/junit.xml",
             "rerun:@rerun.txt",
             "allure-cucumberjs/reporter"
         ],
