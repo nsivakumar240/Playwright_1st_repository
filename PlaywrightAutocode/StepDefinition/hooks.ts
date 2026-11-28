@@ -62,7 +62,7 @@ After(async function (scenario) {
     await context.tracing.stop({ path: tracePath });
 
     // 7. Clean up the context and browser
-    // await context.close();
+    await context.close();
     // await browser.close();
 
       console.log("after")
@@ -73,7 +73,7 @@ AfterAll(async function () {
     //close the page
     //await pageFixture.page.close();
 
-    //browser.close/context.close 
+   await  browser.close()
 
     //await context.close()
 
