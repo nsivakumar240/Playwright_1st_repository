@@ -72,26 +72,35 @@ pipeline {
         }
 
         stage('Run Cucumber Tests') {
-    steps {
-        withEnv([
-            "BROWSER=${params.BROWSER}",
-            "MODE=${params.MODE}"
-        ]) {
-            script {
-                if (params.MODE == 'headed') {
-                    sh "xvfb-run -a npm run ${params.TEST_SUITE}"
-                } else {
-                    sh "npm run ${params.TEST_SUITE}"
+            steps {
+                withEnv([
+                    "BROWSER=${params.BROWSER}",
+                    "MODE=${params.MODE}"
+                ]) {
+                    script {
+                        if (params.MODE == 'headed') {
+                            sh "xvfb-run -a npm run ${params.TEST_SUITE}"
+                        } else {
+                            sh "npm run ${params.TEST_SUITE}"
+                        }
+                    }
                 }
             }
         }
-    }
-}
     }
 
     post {
 
         always {
+
+            // Generate Custom Cucumber HTML Report
+            script {
+                if (fileExists('test-result/cucumber-report.json')) {
+                    sh 'node generate-custom-report.js'
+                } else {
+                    echo 'Cucumber JSON report not found. Skipping custom report generation.'
+                }
+            }
 
             // Archive test reports
             archiveArtifacts(
@@ -119,6 +128,16 @@ pipeline {
                 reportDir: 'test-result',
                 reportFiles: 'cucumber-report.html',
                 reportName: 'Cucumber HTML Report'
+            ])
+
+            // Publish Custom Cucumber HTML report
+            publishHTML([
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'test-result',
+                reportFiles: 'custom-cucumber-report.html',
+                reportName: 'Custom Cucumber HTML Report'
             ])
 
             // Send email notification
