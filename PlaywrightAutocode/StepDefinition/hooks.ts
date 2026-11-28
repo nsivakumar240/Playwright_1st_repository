@@ -14,7 +14,7 @@ let context: BrowserContext;
 setDefaultTimeout(60000) // 60 seconds, if any step takes more than 60 seconds, it will be failed due to timeout error
 
 //first browser instance from BeforeAll 
-BeforeAll(async function () {   
+BeforeAll(async function () {
 
     browser = await chromium.launch({
         //headless: false,
@@ -30,7 +30,7 @@ BeforeAll(async function () {
 
 Before(async function () {
 
-     // Create directories if they do not exist
+    // Create directories if they do not exist
     fs.mkdirSync('test-result/videos', { recursive: true });
     fs.mkdirSync('reports/traces', { recursive: true });
 
@@ -46,7 +46,7 @@ Before(async function () {
         snapshots: true,
         sources: true
     });
-//Tab
+    //Tab
     page = await context.newPage();
 
     pageFixture.page = page
@@ -94,11 +94,11 @@ After(async function (scenario) {
     //video file 
     const buildNumber = process.env.BUILD_NUMBER || 'local';
 
-const videoPath = path.join(
-    process.cwd(),
-    'test-result/videos',
-    `${traceName}#${buildNumber}.webm`
-);
+    const videoPath = path.join(
+        process.cwd(),
+        'test-result/videos',
+        `${traceName}#${buildNumber}.webm`
+    );
 
     // Get video before closing the page
     const video = pageFixture.page.video();
@@ -126,7 +126,7 @@ AfterAll(async function () {
     //close the page
     //await pageFixture.page.close();
 
-   await  browser.close()
+    await browser.close()
 
     //await context.close()
 
@@ -168,7 +168,7 @@ Then('I verify playwright frames in hooks', async function () {
 
     var bottomText2ndWay = await bottomText?.locator("//*[contains(text(),'BOTTOM')]").innerText()
 
-   console.log("bottomText2ndWay is :", bottomText2ndWay) //BOTTOM
+    console.log("bottomText2ndWay is :", bottomText2ndWay) //BOTTOM
 
     /*allFramesCount is : 6
 bottomText1stWay is : BOTTOM
