@@ -16,11 +16,13 @@ setDefaultTimeout(60000) // 60 seconds, if any step takes more than 60 seconds, 
 BeforeAll(async function () {   
 
     browser = await chromium.launch({
-        headless: false,
+        //headless: false,
+        headless: process.env.MODE?.toLowerCase() !== 'headed',
         args: ["--start-maximized"],
     });
 
     console.log("BeforeAll")
+    console.log("Browser Mode:", process.env.MODE || "headless (default)");
 });
 
 //opening the browser and Tab and trace viewer
