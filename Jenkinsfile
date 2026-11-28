@@ -72,15 +72,21 @@ pipeline {
         }
 
         stage('Run Cucumber Tests') {
-            steps {
-                withEnv([
-                    "BROWSER=${params.BROWSER}",
-                    "MODE=${params.MODE}"
-                ]) {
+    steps {
+        withEnv([
+            "BROWSER=${params.BROWSER}",
+            "MODE=${params.MODE}"
+        ]) {
+            script {
+                if (params.MODE == 'headed') {
+                    sh "xvfb-run -a npm run ${params.TEST_SUITE}"
+                } else {
                     sh "npm run ${params.TEST_SUITE}"
                 }
             }
         }
+    }
+}
     }
 
     post {
