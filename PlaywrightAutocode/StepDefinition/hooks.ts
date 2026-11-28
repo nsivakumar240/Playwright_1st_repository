@@ -5,6 +5,7 @@ import { Given, When, Then, setDefaultTimeout } from "@cucumber/cucumber";
 import { pageFixture } from "../hooks/pageFixture";
 import path from 'path';
 import process from 'process';
+import fs from 'fs';
 
 let page: Page;
 let browser: Browser;
@@ -29,6 +30,10 @@ BeforeAll(async function () {
 
 Before(async function () {
 
+     // Create directories if they do not exist
+    fs.mkdirSync('test-result/videos', { recursive: true });
+    fs.mkdirSync('reports/traces', { recursive: true });
+
     context = await browser.newContext({
         recordVideo: { dir: 'test-result/videos' },
         viewport: null
@@ -49,7 +54,7 @@ Before(async function () {
     console.log("Before")
 });
 //this is for trace viewer
-After(async function (scenario) {
+/*After(async function (scenario) {
     // Sanitize scenario name to use as a filename
     const traceName = scenario.pickle.name.replace(/[^a-zA-Z0-9]/g, '_');
     const tracePath = path.join(process.cwd(), `reports/traces/${traceName}.zip`);
@@ -66,6 +71,45 @@ After(async function (scenario) {
     // await browser.close();
 
       console.log("after")
+});*/
+
+//each video a meaningful scenario name instead of random names
+After(async function (scenario) {
+    // Create a safe filename from the scenario name
+    const traceName = scenario.pickle.name.replace(/[^a-zA-Z0-9]/g, '_');
+
+    // Trace file path
+    const tracePath = path.join(
+        process.cwd(),
+        `reports/traces/${traceName}.zip`
+    );
+
+    // Video file path
+    const videoPath = path.join(
+        process.cwd(),
+        'test-result/videos',
+        `${traceName}.webm`
+    );
+
+    // Get video before closing the page
+    const video = pageFixture.page.video();
+
+    // Close page
+    await pageFixture.page.close();
+
+    // Save trace
+    await context.tracing.stop({ path: tracePath });
+
+    // Save video with scenario name
+    if (video) {
+        await video.saveAs(videoPath);
+    }
+
+    // Close context
+    await context.close();
+
+    console.log(`Video saved: ${videoPath}`);
+    console.log("after");
 });
 
 AfterAll(async function () {
