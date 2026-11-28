@@ -85,11 +85,20 @@ After(async function (scenario) {
     );
 
     // Video file path
-    const videoPath = path.join(
+    /*const videoPath = path.join(
         process.cwd(),
         'test-result/videos',
         `${traceName}.webm`
-    );
+    );*/
+
+    //video file 
+    const buildNumber = process.env.BUILD_NUMBER || 'local';
+
+const videoPath = path.join(
+    process.cwd(),
+    'test-result/videos',
+    `${traceName}#${buildNumber}.webm`
+);
 
     // Get video before closing the page
     const video = pageFixture.page.video();
